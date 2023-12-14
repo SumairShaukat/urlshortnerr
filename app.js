@@ -18,6 +18,15 @@ app.get("/", (req, res) => {
   res.send("Welcome to ");
 });
 
+
+app.use((req, res, next) => {
+  next(createHttpError.NotFound())
+  
+})
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500)
+})
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
