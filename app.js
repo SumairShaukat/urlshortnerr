@@ -31,7 +31,8 @@ app.post("/",  async (req, res, next) => {
       throw  createHttpError.BadRequest('Provide a valid url');
     }
     const urlExist = await Shorturl.findOne({url});
-    
+    const shorturl = new Shorturl({url: url, shortid: shortid.generate()});
+    const result = await shorturl.save()
   } catch (error) {
     next(error);
   }
